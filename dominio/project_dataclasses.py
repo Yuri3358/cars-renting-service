@@ -3,16 +3,17 @@ from datetime import date
 from typing import Literal
 
 @dataclass
-class Veiculo:
-    id: str
-    placa: str
-    categoria: Literal["SUV", "Sedan", "Hatch"]
-    valor_diaria: float
+class Vehicle:
+    brand: str
+    model: str
+    license_plate: str
+    categy: Literal["SUV", "Sedan", "Hatch"]
+    daily_rent: float
 
 @dataclass
-class Locação:
-    id_locacao: str
-    id_veiculo: str
-    cliente: str
-    inicio: date
-    termino: date
+class Renting:
+    renting_id: str
+    license_plae: str
+    client_id: str
+    starting: date
+    ending: date
