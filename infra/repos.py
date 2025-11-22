@@ -9,8 +9,8 @@ class VehicleRepo:
         self.cursor.execute("SELECT * FROM vehicles")
         return self.cursor.fetchall()
     
-    def register_vehicle(self, brand, model, license_plate, category: Literal["SUV", "Hatch", "Sedan"]):
-        self.cursor.execute("INSERT INTO vehicles (brand, model, license_plate, category) VALUES (?, ?, ?, ?)", (brand, model, license_plate, category))
+    def register_vehicle(self, brand, model, license_plate, category: Literal["SUV", "Hatch", "Sedan"], daily_value):
+        self.cursor.execute("INSERT INTO vehicles (brand, model, license_plate, category) VALUES (?, ?, ?, ?, ?)", (brand, model, license_plate, category, daily_value))
         self.connection.commit()
 
 class RentingRepo:
@@ -23,5 +23,5 @@ class RentingRepo:
         return self.cursor.fetchall()
     
     def register_renting(self, renting_id, license_plate, start_rent_date, end_rent_date):
-        self.cursor.execute("INSERT INTO rentings (renting_id, license_plate, start_date, end_date) VALUES (?, ?)", (renting_id, license_plate, start_rent_date, end_rent_date))
+        self.cursor.execute("INSERT INTO rentings (renting_id, license_plate, start_date, end_date) VALUES (?, ?, ?, ?)", (renting_id, license_plate, start_rent_date, end_rent_date))
         self.connection.commit()

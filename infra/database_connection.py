@@ -9,6 +9,7 @@ conn.execute('''
         brand TEXT,
         model TEXT,
         license_plate TEXT,
-        category TEXT
+        category TEXT,
+        daily_rent REAL
     )
 ''')
