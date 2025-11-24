@@ -1,8 +1,6 @@
-from repos import VehicleRepo
-
 import sqlite3 as sq
 
-conn = sq.connect("./infra/renting_service.db")
+conn = sq.connect("./infra/renting_service.db",  detect_types=sq.PARSE_DECLTYPES | sq.PARSE_COLNAMES)
 
 conn.execute('''
     CREATE TABLE IF NOT EXISTS vehicles (
@@ -11,5 +9,15 @@ conn.execute('''
         license_plate TEXT,
         category TEXT,
         daily_rent REAL
+    )
+''')
+
+conn.execute('''
+    CREATE TABLE IF NOT EXISTS rentings (
+        renting_id TEXT
+        license_plate TEXT
+        client_id TEXT
+        starting_renting DATE
+        ending_renting DATE
     )
 ''')
