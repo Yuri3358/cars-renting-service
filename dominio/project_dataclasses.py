@@ -13,7 +13,7 @@ class Vehicle:
 @dataclass
 class Renting:
     renting_id: str
-    license_plae: str
+    license_plate: str
     client_id: str
     starting: date
     ending: date
