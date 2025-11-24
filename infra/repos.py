@@ -22,6 +22,6 @@ class RentingRepo:
         self.cursor.execute("SELECT * FROM renting WHERE license_plate = ?", (license_plate))
         return self.cursor.fetchall()
     
-    def register_renting(self, renting_id, license_plate, start_rent_date, end_rent_date):
-        self.cursor.execute("INSERT INTO rentings (renting_id, license_plate, start_date, end_date) VALUES (?, ?, ?, ?)", (renting_id, license_plate, start_rent_date, end_rent_date))
+    def register_renting(self, renting_id, client_id, license_plate, start_rent_date, end_rent_date):
+        self.cursor.execute("INSERT INTO rentings (renting_id, client_id, license_plate, start_date, end_date) VALUES (?, ?, ?, ?, ?)", (renting_id, client_id, license_plate, start_rent_date, end_rent_date))
         self.connection.commit()
