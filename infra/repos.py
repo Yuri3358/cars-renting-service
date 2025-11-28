@@ -25,3 +25,7 @@ class RentingRepo:
     def register_renting(self, renting_id, client_id, license_plate, start_rent_date, end_rent_date):
         self.cursor.execute("INSERT INTO rentings (renting_id, client_id, license_plate, start_date, end_date) VALUES (?, ?, ?, ?, ?)", (renting_id, client_id, license_plate, start_rent_date, end_rent_date))
         self.connection.commit()
+
+    def delete_renting(self, renting_id):
+        self.cursor.execute("DELETE FROM rentings WHERE renting_id = ?", (renting_id))
+        self.connection.commit()
