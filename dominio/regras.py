@@ -20,6 +20,16 @@ class RentingRules:
         
         if duration <= 0:
             raise ValueError("Data de término menor que a de início da locação.")
+        
+    @staticmethod
+    def check_vehicle_avaliable(vehicle, rentings, desired_start, desired_end):
+        for rent in rentings:
+            if vehicle.license_plate == rent.license_plate:
+                if not (desired_end <= rent.end or desired_start >= desired_end):
+                    return False
+                else:
+                    return True
+                
     @staticmethod  
     def renting_price_calc(renting, vehicle):
         daily_value = vehicle.daily_rent
