@@ -13,6 +13,9 @@ class VehicleRepo:
         self.cursor.execute("INSERT INTO vehicles (brand, model, license_plate, category) VALUES (?, ?, ?, ?, ?)", (brand, model, license_plate, category, daily_value))
         self.connection.commit()
 
+    def delete_vehicle(self, license_plate):
+        self.cursor.execute("DELETE FROM vehicles WHERE license_plate = ?", (license_plate))
+
 class RentingRepo:
     def __init__(self, connection):
         self.connection = connection
