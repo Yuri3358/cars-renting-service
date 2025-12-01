@@ -15,5 +15,5 @@ class Renting:
     renting_id: str
     license_plate: str
     client_id: str
-    starting: date
-    ending: date
+    start: date
+    end: date

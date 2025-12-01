@@ -20,7 +20,7 @@ class RentingRules:
         
         if duration <= 0:
             raise ValueError("Data de término menor que a de início da locação.")
-        
+    @staticmethod  
     def renting_price_calc(renting, vehicle):
         daily_value = vehicle.daily_rent
         renting_duration = (renting.end - renting.start).days
