@@ -1,14 +1,13 @@
 from infra.database_connection import conn
 from infra.sql_repos import VehicleRepoSQL, RentingRepoSQL
 from dominio.vehicle_service import VehicleService
-from dominio.regras import RentingRules
-from dominio.entities import Renting
-from datetime import date
+from app.fachada import RentingFacade
 
 vehicle_repo = VehicleRepoSQL(conn)
 renting_repo = RentingRepoSQL(conn)
 
 vehicle_service = VehicleService(vehicle_repo)
+facade = RentingFacade(vehicle_repo, renting_repo, vehicle_service)
 
 def main():
     while True:
@@ -26,13 +25,13 @@ def main():
             daily_rent = float(input("Valor diário: "))
 
             try:
-                vehicle_service.create_vehicle(brand, model, license_plate, category, daily_rent)
+                facade.create_vehicle(brand, model, license_plate, category, daily_rent)
                 print("Veículo cadastrado com sucesso!")
             except ValueError as e:
                 print(e)
 
         elif option == "2":
-            vehicles = vehicle_repo.get_vehicles()
+            vehicles = facade.get_vehicles()
             for v in vehicles:
                 print(v)
 
