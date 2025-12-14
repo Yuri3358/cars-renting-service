@@ -7,7 +7,7 @@ class Vehicle:
     brand: str
     model: str
     license_plate: str
-    categy: Literal["SUV", "Sedan", "Hatch"]
+    category: Literal["SUV", "Sedan", "Hatch"]
     daily_rent: float
 
 @dataclass
