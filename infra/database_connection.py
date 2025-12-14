@@ -14,10 +14,10 @@ conn.execute('''
 
 conn.execute('''
     CREATE TABLE IF NOT EXISTS rentings (
-        renting_id TEXT
-        license_plate TEXT
-        client_id TEXT
-        starting_renting DATE
-        ending_renting DATE
+        renting_id TEXT,
+        license_plate TEXT,
+        client_id TEXT,
+        starting_renting DATE,
+        ending_renting DATE,
     )
 ''')
