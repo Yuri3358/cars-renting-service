@@ -2,6 +2,7 @@ from infra.database_connection import conn
 from infra.sql_repos import VehicleRepoSQL, RentingRepoSQL
 from dominio.vehicle_service import VehicleService
 from app.fachada import RentingFacade
+from datetime import date
 
 vehicle_repo = VehicleRepoSQL(conn)
 renting_repo = RentingRepoSQL(conn)
@@ -17,7 +18,7 @@ def main():
 
         option = input("Escolha: ")
 
-        if option == "1":
+        if option == "1": #Registrar veículo
             brand = input("Marca: ")
             model = input("Modelo: ")
             license_plate = input("Placa: ")
@@ -30,13 +31,28 @@ def main():
             except ValueError as e:
                 print(e)
 
-        elif option == "2":
+        elif option == "2": #listar veículos
             vehicles = facade.get_vehicles()
             for v in vehicles:
                 print(v)
 
-        elif option == "3":
-            break
+        elif option == "3": #alugar veículo
+            renting_id = input("ID da locação: ")
+            license_plate = input("Placa do veículo: ")
+            client_id = input("ID do cliente (CPF, somente números): ")
+            start = date.fromisoformat(input("Data de início (YYYY-MM-DD): "))
+            end = date.fromisoformat(input("Data de término (YYYY-MM-DD): "))
 
+            try:
+                total_price = facade.create_rentings(renting_id, license_plate, client_id, start, end)
+                print(f"Locação realizada com sucesso! Valor total: R$ {total_price:.2f}")
+            except ValueError as e:
+                print("Erro:", e)
+
+        elif option == "4": #sair
+            break
         else:
             print("Opção inválida.")
+
+if __name__ == "__main__":
+    main()
