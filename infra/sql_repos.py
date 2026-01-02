@@ -12,7 +12,7 @@ class VehicleRepoSQL:
         return [Vehicle(*row) for row in rows]
 
     def get_vehicles_by_license(self, license_plate):
-        self.cursor.execute("SELECT * FROM vehicles WHERE license_plate = ?", (license_plate))
+        self.cursor.execute("SELECT * FROM vehicles WHERE license_plate = ?", (license_plate,))
         row = self.cursor.fetchone()
         return Vehicle(*row) if row else None
 
@@ -21,7 +21,7 @@ class VehicleRepoSQL:
         self.connection.commit()
 
     def delete_vehicle(self, license_plate):
-        self.cursor.execute("DELETE FROM vehicles WHERE license_plate = ?", (license_plate))
+        self.cursor.execute("DELETE FROM vehicles WHERE license_plate = ?", (license_plate,))
         self.connection.commit()
 
 
@@ -31,12 +31,12 @@ class RentingRepoSQL:
         self.cursor = self.connection.cursor()
 
     def get_vehicle_by_license_plate(self, license_plate):
-        self.cursor.execute("SELECT * FROM rentings WHERE license_plate = ?", (license_plate))
+        self.cursor.execute("SELECT * FROM rentings WHERE license_plate = ?", (license_plate,))
         rows = self.cursor.fetchall()
         return [Renting(*row) for row in rows]
 
-    def register_renting(self, renting_id, client_id, license_plate, start_rent_date, end_rent_date):
-        self.cursor.execute("INSERT INTO rentings (renting_id, client_id, license_plate, starting_renting, ending_renting) VALUES (?, ?, ?, ?, ?)", (renting_id, client_id, license_plate, start_rent_date, end_rent_date))
+    def register_renting(self, renting_id, client_id, license_plate, start, end):
+        self.cursor.execute("INSERT INTO rentings (renting_id, license_plate, client_id, start, end) VALUES (?, ?, ?, ?, ?)", (renting_id, license_plate, client_id, start, end))
         self.connection.commit()
 
     def delete_renting(self, renting_id):
