@@ -1,20 +1,24 @@
 from infra.database_connection import conn
 from infra.sql_repos import VehicleRepoSQL, RentingRepoSQL
 from dominio.vehicle_service import VehicleService
+from dominio.renting_services import RentingService
 from app.fachada import RentingFacade
 from datetime import date
+from uuid import uuid4
 
 vehicle_repo = VehicleRepoSQL(conn)
 renting_repo = RentingRepoSQL(conn)
 
 vehicle_service = VehicleService(vehicle_repo)
-facade = RentingFacade(vehicle_repo, renting_repo, vehicle_service)
+renting_service = RentingService(renting_repo, vehicle_repo)
+facade = RentingFacade(vehicle_repo, renting_repo, vehicle_service, renting_service)
 
 def main():
     while True:
         print("\n1 - Cadastrar veículo")
         print("2 - Listar veículos")
-        print("3 - Sair")
+        print("3 - Alugar veículo")
+        print("4 - Sair")
 
         option = input("Escolha: ")
 
@@ -37,7 +41,7 @@ def main():
                 print(v)
 
         elif option == "3": #alugar veículo
-            renting_id = input("ID da locação: ")
+            renting_id = str(uuid4())
             license_plate = input("Placa do veículo: ")
             client_id = input("ID do cliente (CPF, somente números): ")
             start = date.fromisoformat(input("Data de início (YYYY-MM-DD): "))
