@@ -2,7 +2,7 @@ import sqlite3
 from datetime import date
 import builtins
 import pytest
-
+from uuid import uuid4
 from infra.sql_repos import VehicleRepoSQL, RentingRepoSQL
 from dominio.vehicle_service import VehicleService
 from dominio.renting_services import RentingService
@@ -58,17 +58,15 @@ def test_e2e_renting_conflict(monkeypatch):
 
         # primeira locação (válida)
         "3",
-        "R1",
         "XYZ9999",
-        "CLIENTE1",
+        "12345678900",
         "2024-02-01",
         "2024-02-10",
 
         # segunda locação (conflitante)
         "3",
-        "R2",
         "XYZ9999",
-        "CLIENTE2",
+        "24681012140",
         "2024-02-05",
         "2024-02-12",
 
@@ -203,9 +201,8 @@ def test_e2e_full_application_flow(monkeypatch):
 
         # alugar veículo
         "3",
-        "R1",
         "ABC1234",
-        "CLIENTE1",
+        "12345678900",
         "2024-01-01",
         "2024-01-06",
 
@@ -263,7 +260,7 @@ def test_e2e_full_application_flow(monkeypatch):
                 print(v)
 
         elif option == "3":
-            renting_id = input("ID da locação: ")
+            renting_id = str(uuid4())
             license_plate = input("Placa do veículo: ")
             client_id = input("ID do cliente: ")
 
@@ -275,9 +272,9 @@ def test_e2e_full_application_flow(monkeypatch):
             )
 
             total = facade.create_rentings(
+                renting_id,
                 license_plate,
                 client_id,
-                renting_id,
                 start,
                 end
             )
@@ -287,7 +284,7 @@ def test_e2e_full_application_flow(monkeypatch):
         elif option == "4":
             break
 
-    rentings = renting_repo.get_vehicle_by_license_plate("XYZ9999")
+    rentings = renting_repo.get_vehicle_by_license_plate("ABC1234")
     # ---------- ASSERTIVAS (verificação final) ----------
     assert any("Veículo cadastrado com sucesso!" in o for o in outputs)
     assert len(rentings) == 1

@@ -35,7 +35,7 @@ class RentingRepoSQL:
         rows = self.cursor.fetchall()
         return [Renting(*row) for row in rows]
 
-    def register_renting(self, renting_id, client_id, license_plate, start, end):
+    def register_renting(self, renting_id, license_plate, client_id, start, end):
         self.cursor.execute("INSERT INTO rentings (renting_id, license_plate, client_id, start, end) VALUES (?, ?, ?, ?, ?)", (renting_id, license_plate, client_id, start, end))
         self.connection.commit()
 
