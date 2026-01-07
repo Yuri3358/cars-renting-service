@@ -50,3 +50,6 @@ Devido ao design do projeto, as pastas foram organizadas dividindo a parte de in
 - App: fachada do projeto, aqui localiza-se a síntese do domínio para ser utilizada pela interface de usuário, no caso do projeto o `main.py`;
 
 - Assets: os arquivos desta pasta não possuem ligação com o DDD, eles servem somente para abrigar os GIFs utilizados no `README.md` na seção de "Como utilizar o sistema".
+
+## Observações
+Desde o início do desenvolvimento, o projeto conta com [um repositório no Github](https://github.com/Yuri3358/cars-renting-service). Um aspecto relevante sobre o versionamento é que, como a documentação do histórico de commits foi criada após a conclusão do projeto, não foi possivel versionar no repositório, sendo as versões do  `HISTORY.md` apenas marcações "alegóricas" das *features* relevantes implementadas no projeto com exceção da v1.0.0 na aba `Releases`.
