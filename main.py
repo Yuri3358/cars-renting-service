@@ -15,6 +15,7 @@ facade = RentingFacade(vehicle_repo, renting_repo, vehicle_service, renting_serv
 
 def main():
     while True:
+        print("Boas vindas ao sistema de locação de veículos! Por favor selecione uma das opções a seguir")
         print("\n1 - Cadastrar veículo")
         print("2 - Listar veículos")
         print("3 - Alugar veículo")
@@ -37,8 +38,8 @@ def main():
 
         elif option == "2": #listar veículos
             vehicles = facade.get_vehicles()
-            for v in vehicles:
-                print(v)
+            for vehicle in vehicles:
+                print(f"""{'-'*30}\nMarca: {vehicle.brand}\n Modelo: {vehicle.model}\n Placa {vehicle.license_plate}\n Categoria {vehicle.category}\n Diária de Locação: {vehicle.daily_rent}\n{'-'*30}""")
 
         elif option == "3": #alugar veículo
             renting_id = str(uuid4())
